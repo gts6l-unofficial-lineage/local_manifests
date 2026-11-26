@@ -22,7 +22,13 @@ GApps through `addon.d`.
 
 Not yet verified: WPA3, mobile data and calls.
 
-Known issues: see the issue tracker of this repository.
+Known issues:
+
+- The first sound after boot can be distorted for about two seconds, until the amplifier
+  firmware is loaded.
+- The camera takes a few seconds to open the first time after boot.
+- The setup wizard can reject a new PIN as not matching; set the PIN in Settings instead.
+- The log shows `Failed to enable fs-verity` messages; fs-verity is not enabled.
 
 ## Building
 

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 #
+# SPDX-License-Identifier: Apache-2.0
+#
 # Fetch the stock firmware for the Galaxy Tab S6 LTE (SM-T865) from Samsung's
 # update servers, unpack its vendor image and run the LineageOS extraction
 # scripts on it. Nothing is redistributed: the files go straight from Samsung
