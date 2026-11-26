@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <!-- Unofficial LineageOS 24.0 for the Samsung Galaxy Tab S6 LTE (gts6l, SM-T865) -->
+  <remote name="gts6l" fetch="https://github.com/GITHUB_ORG" />
+
+  <project path="device/samsung/gts6l" name="android_device_samsung_gts6l"
+           remote="gts6l" revision="lineage-24.0" />
+  <project path="device/samsung/sm8150-common" name="android_device_samsung_sm8150-common"
+           remote="gts6l" revision="lineage-24.0" />
+  <project path="kernel/samsung/sm8150" name="android_kernel_samsung_sm8150"
+           remote="gts6l" revision="lineage-24.0" />
+
+  <!-- From LineageOS, not in the default 24.0 manifest -->
+  <project path="hardware/samsung" name="LineageOS/android_hardware_samsung"
+           remote="github" revision="lineage-24.0" />
+  <!-- GNU ld for the 4.14 kernel (clang compiles, GNU ld links) -->
+  <project path="prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9"
+           name="LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9"
+           remote="github" revision="lineage-19.1" clone-depth="1" />
+  <project path="prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9"
+           name="LineageOS/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9"
+           remote="github" revision="lineage-19.1" clone-depth="1" />
+</manifest>
