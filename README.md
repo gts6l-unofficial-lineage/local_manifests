@@ -29,11 +29,19 @@ Known issues: see the issue tracker of this repository.
     git clone https://github.com/GITHUB_ORG/local_manifests -b lineage-24.0 .repo/local_manifests
     repo sync
 
-The proprietary files are not distributed. Extract them from a stock firmware dump
-(T865XXU6DXE1) or from a tablet running it:
+The proprietary files are not distributed. `extract-stock-blobs.sh` downloads the stock
+firmware from Samsung's update servers (about 6 GB), unpacks its vendor image and runs
+the extraction scripts:
 
-    cd device/samsung/gts6l
-    ./extract-files.py /path/to/firmware/dump
+    .repo/local_manifests/extract-stock-blobs.sh .
+
+It needs `samloader`, `unzip`, `tar`, `lz4`, `simg2img`, `debugfs` and `python3`. Pass an
+already downloaded firmware package as second argument to skip the download. To extract
+from an unpacked vendor image by hand, run `./extract-files.py /path/to/dump` in
+`device/samsung/gts6l`.
+
+Samsung's servers only offer the latest firmware, currently T865XXU6DXJ1. The file lists
+were made from T865XXU6DXE1; 12 of the 474 files differ between the two.
 
 Then build:
 
