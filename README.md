@@ -1,6 +1,7 @@
 # LineageOS 24.0 for the Samsung Galaxy Tab S6 LTE (gts6l, SM-T865)
 
-Unofficial port. This repository is the entry point: the `repo` manifest, the build
+Unofficial port, beta quality: it runs as a daily driver on one tablet, but expect bugs
+and keep a backup. This repository is the entry point: the `repo` manifest, the build
 environment and the install notes. The code lives in three other repositories:
 
 | Repository | Path in the source tree | Contents |
