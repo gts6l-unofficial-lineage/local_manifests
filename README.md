@@ -19,6 +19,37 @@ An unofficial port. It is not made, endorsed or supported by the LineageOS proje
 do not report its bugs there. Beta quality: it runs as a daily driver on one tablet, but
 expect bugs and keep a backup.
 
+## Installing
+
+Download `lineage-24.0-*-UNOFFICIAL-gts6l.zip`, `recovery.img` and `vbmeta.img` from the
+[latest release](https://github.com/gts6l-unofficial-lineage/local_manifests/releases)
+and check them against `SHA256SUMS`. (When building yourself, the three files are in
+`out/target/product/gts6l/`.)
+
+The bootloader must be unlocked and the tablet must run the T865XXU6DXE1 firmware. You
+need `heimdall` and `adb`. **Installing wipes all data.**
+
+1. Put the tablet in download mode: power it off, then hold Volume Up + Volume Down while
+   plugging in the USB cable.
+2. Flash the recovery and the disabled-verification vbmeta image:
+
+       heimdall flash --RECOVERY recovery.img --VBMETA vbmeta.img --no-reboot
+
+3. Boot straight into recovery: hold Power + Volume Down until the screen goes black, then
+   immediately hold Power + Volume Up. If the stock system starts instead, it replaces the
+   recovery and you have to repeat from step 1.
+4. Choose *Factory reset* > *Format data/factory reset*.
+5. Choose *Apply update* > *Apply from ADB* and sideload the build:
+
+       adb sideload lineage-24.0-*-UNOFFICIAL-gts6l.zip
+
+6. Optional: sideload a GApps package (MindTheGapps for Android 17, arm64) the same way
+   before the first boot. The recovery asks whether to install it despite its signature;
+   answer *Yes*.
+7. Choose *Reboot system now*. The first boot takes a few minutes.
+
+Updates are installed the same way (step 5 only); data and GApps are kept.
+
 This repository is the entry point: the `repo` manifest, the build environment and the
 install notes. The code lives in three other repositories:
 
@@ -119,26 +150,6 @@ The pinned manifest has not been tested with a fresh `repo sync`.
 On NixOS, `nix/fhs.nix` provides the host environment:
 
     nix-build .repo/local_manifests/nix/fhs.nix -o fhs && ./fhs/bin/lineage-build
-
-## Installing
-
-The bootloader must be unlocked and the tablet must run the T865XXU6DXE1 firmware.
-Installing wipes all data.
-
-1. Put the tablet in download mode and flash the recovery and the disabled-verification
-   vbmeta image from the build output:
-
-       heimdall flash --RECOVERY recovery.img --VBMETA vbmeta.img --no-reboot
-
-2. Boot into recovery (hold Power + Volume Up while it restarts), choose
-   *Factory reset* > *Format data*.
-3. Choose *Apply update* > *Apply from ADB* and sideload the build:
-
-       adb sideload lineage-24.0-*-UNOFFICIAL-gts6l.zip
-
-4. Optional: sideload a GApps package before the first boot.
-
-Updates are installed the same way (step 3 only); data and GApps are kept.
 
 ## Security notes
 
