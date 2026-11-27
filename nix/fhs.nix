@@ -1,4 +1,7 @@
-# AOSP/LineageOS build env on NixOS: `nix-build fhs.nix -o fhs` then `./fhs/bin/lineage-build` (or `-c "cmd"`).
+# SPDX-FileCopyrightText: 2026 lunar-seal
+# SPDX-License-Identifier: Apache-2.0
+#
+# AOSP/LineageOS build env on NixOS: `nix-build .repo/local_manifests/nix/fhs.nix -o fhs` then `./fhs/bin/lineage-build` (or `-c "cmd"`).
 # AOSP ships its own clang, JDK and build tools in prebuilts/; this only provides what it expects from the host.
 { pkgs ? import <nixpkgs> { } }:
 pkgs.buildFHSEnv {
@@ -17,7 +20,7 @@ pkgs.buildFHSEnv {
   multiPkgs = p: with p; [ zlib ncurses5 ];
   profile = ''
     export ALLOW_NINJA_ENV=true
-    export USE_CCACHE=1 CCACHE_DIR=$HOME/android/ccache CCACHE_EXEC=${pkgs.ccache}/bin/ccache
+    export CCACHE_EXEC=${pkgs.ccache}/bin/ccache   # set USE_CCACHE=1 and CCACHE_DIR to use it
     export LC_ALL=C.UTF-8
   '';
   runScript = "bash";

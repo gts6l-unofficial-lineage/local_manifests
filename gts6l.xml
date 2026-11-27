@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-FileCopyrightText: 2026 lunar-seal
+     SPDX-License-Identifier: Apache-2.0 -->
 <manifest>
   <!-- Unofficial LineageOS 24.0 for the Samsung Galaxy Tab S6 LTE (gts6l, SM-T865) -->
   <remote name="gts6l" fetch="https://github.com/GITHUB_ORG" />

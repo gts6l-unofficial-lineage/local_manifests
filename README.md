@@ -28,7 +28,6 @@ Known issues:
   firmware is loaded.
 - The camera takes a few seconds to open the first time after boot.
 - The setup wizard can reject a new PIN as not matching; set the PIN in Settings instead.
-- The log shows `Failed to enable fs-verity` messages; fs-verity is not enabled.
 
 ## Building
 
@@ -48,7 +47,7 @@ from an unpacked vendor image by hand, run `./extract-files.py /path/to/dump` in
 `device/samsung/gts6l`.
 
 Samsung's servers only offer the latest firmware, currently T865XXU6DXJ1. The file lists
-were made from T865XXU6DXE1; 12 of the 474 files differ between the two.
+were made from T865XXU6DXE1; 12 of the extracted files differ between the two.
 
 Then build:
 
@@ -56,9 +55,11 @@ Then build:
     lunch lineage_gts6l-cp2a-userdebug
     m bacon
 
+A `userdebug` build made this way is signed with the public AOSP test keys.
+
 On NixOS, `nix/fhs.nix` provides the host environment:
 
-    nix-build nix/fhs.nix -o fhs && ./fhs/bin/lineage-build
+    nix-build .repo/local_manifests/nix/fhs.nix -o fhs && ./fhs/bin/lineage-build
 
 ## Installing
 
