@@ -97,6 +97,11 @@ Installing wipes all data.
 
 Updates are installed the same way (step 3 only); data and GApps are kept.
 
+## Updates
+
+The Updater app reads `updates/gts6l.json` from this repository. The list is empty until
+builds are published; updates can always be installed from recovery as described above.
+
 ## Layout notes
 
 - Stock `SYSTEM` holds a dynamic `super` partition (system, system_ext, product, vendor,
