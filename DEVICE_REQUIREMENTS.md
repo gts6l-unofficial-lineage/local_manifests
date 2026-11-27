@@ -21,8 +21,8 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 | USB-C audio output | Fix in the tree, untested |
 | Mobile data, calls, emergency calls | Untested (no SIM) |
 | Wi-Fi and Bluetooth MAC address as on stock | Not compared with stock |
-| Wi-Fi hotspot, USB tethering, MTP | Untested |
-| Video recording | Untested |
+| Wi-Fi hotspot | Not working |
+| USB tethering, MTP | Untested |
 | Hardware video encoding | Untested |
 | Updater app | Points at this port's list; an update through it is untested |
 | Firmware assert | Missing: the build installs on any firmware |
@@ -61,7 +61,7 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 
 - [x] MUST support Wi-Fi. Including WPA3.
 - [ ] MUST report the same MAC address as stock. **Not compared.**
-- [ ] MUST support Wi-Fi tethering. **Untested.**
+- [ ] MUST support Wi-Fi tethering. **Not working** as reported by the owner; the access point starts, the cause is not found yet.
 
 ### USB
 
@@ -87,7 +87,7 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 
 ### Video recording
 
-- [ ] MUST support video recording, front and rear. **Untested.**
+- [x] MUST support video recording, front and rear. Picture checked; sound not (see microphones).
 
 ### Codecs
 
@@ -107,7 +107,7 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 
 ### Fingerprint sensor
 
-- [x] MUST support the fingerprint sensor (optical, under the display).
+- [x] MUST support the fingerprint sensor (optical, under the display; an artifact shows on screen next to the sensor, and lighting it raises the brightness of the whole panel).
 
 ### SD card
 
@@ -201,7 +201,7 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 
 ### exFAT
 
-- [x] MAY support exFAT with a kernel implementation (kernel older than 5.7, stock supports exFAT). Samsung's sdFAT driver; **fix in the tree, untested** with an exFAT card.
+- [x] MAY support exFAT with a kernel implementation (kernel older than 5.7, stock supports exFAT). Samsung's sdFAT driver. **Not working** in `20261127`; fix in the tree, untested with an exFAT card.
 
 ### Additional features
 
