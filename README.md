@@ -63,36 +63,59 @@ Everything else is unmodified LineageOS 24.0; the port needs no platform patches
 
 ## Status
 
-Tested on one SM-T865 with the T865XXU6DXE1 bootloader and firmware.
+Tested on one SM-T865 with the T865XXU6DXE1 bootloader and firmware. The list follows the
+functions LineageOS requires of its official devices, plus what else this tablet has.
 
-| Area | State |
+"Since 20261127" means: fixed in the source after the `gts6l-24.0-20261127` release, so it
+reaches you with the next build.
+
+### Working
+
+| Function | Notes |
 |---|---|
-| Display, touch, S Pen, book cover | Working |
-| Brightness | Working: stock curve (2 to 360 nits), auto-brightness, sunlight boost to 500 nits, reduced when the tablet gets hot as on stock |
-| Fingerprint, PIN, encryption | Working |
-| Wi-Fi (including WPA3), Bluetooth, GNSS | Working |
-| Speakers | Working: all four, rotation aware, stock tuning |
-| Cameras | Working; the ultra-wide camera is hidden in the LineageOS camera app |
-| Video | Working: hardware decoding |
-| Sensors | Working |
-| Google apps | Working when sideloaded (kept across updates) |
-| Microphones, call audio | Untested, probably not working |
-| Mobile data, calls, SMS | Untested |
-| USB-C audio | Not working |
-| exFAT microSD cards | Not working (FAT32 works) |
-| Double-tap to wake | Not working |
+| Display | Stock resolution and density; brightness from 2 to 360 nits on the stock curve, automatic brightness, sunlight boost to 500 nits, reduced when the tablet gets hot as on stock |
+| Touch screen | Double-tap to wake since 20261127 |
+| S Pen | Writing, pressure, tilt, hover, side button; as a direct pen since 20261127 |
+| Book cover | Sleeps and wakes the tablet |
+| Speakers | All four, rotation aware, stock tuning |
+| Microphones | Recording since 20261127 |
+| Bluetooth | Audio (LDAC, SBC) since 20261127; before that no profile connected |
+| Wi-Fi | Including WPA3 |
+| GPS | |
+| Fingerprint, PIN, encryption | File-based encryption with the hardware keystore |
+| Cameras | Front and rear, photo and video; ultra-wide since 20261127 |
+| Video playback | Hardware decoding |
+| Sensors | Accelerometer, gyroscope, light sensor |
+| microSD | FAT32 cards |
+| Google apps | When sideloaded; kept across updates |
+| Performance hints | Touch and launch boosts since 20261127 (the power HAL was never started before) |
+
+### Not working
+
+| Function | Notes |
+|---|---|
+| Wi-Fi hotspot | Starts and stops at once: the DNS/DHCP helper exits. Since 20261127 the settings screen no longer crashes and the switch works |
+| exFAT microSD cards | Fixed in the source, not yet tested |
+| USB-C audio | Fixed in the source, not yet tested |
+| aptX, aptX HD, AAC over Bluetooth | Only LDAC and SBC are offered |
+| Fingerprint | An artifact shows next to the sensor, and the whole panel brightens while it is lit |
+| Audio calibration | The stock calibration is not loaded; with it, playback broke |
 | VoLTE, VoWiFi | Not available |
 | Widevine | L3 only |
 
-How the port compares with the requirements for official LineageOS devices, item by
-item: [DEVICE_REQUIREMENTS.md](DEVICE_REQUIREMENTS.md).
+### Untested
+
+Calls, mobile data, SMS and emergency calls (no SIM); MTP file transfer; USB and Bluetooth
+tethering; adoptable storage; USB-C display output; HDR playback; the Updater app; the
+magnetometer and hall sensor on their own; battery life.
 
 Other known issues:
 
 - Sounds are distorted during the setup wizard; they are normal afterwards.
 - The camera takes a few seconds to open the first time after boot.
-- The setup wizard can reject a new PIN as not matching; set the PIN in Settings instead.
-- The stock audio calibration is not loaded.
+
+The full comparison with the LineageOS requirements, item by item:
+[DEVICE_REQUIREMENTS.md](DEVICE_REQUIREMENTS.md).
 
 ## Building
 
