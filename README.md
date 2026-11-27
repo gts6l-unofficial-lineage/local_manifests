@@ -1,4 +1,19 @@
-# Unofficial LineageOS 24.0 for the Samsung Galaxy Tab S6 LTE (gts6l, SM-T865)
+# Unofficial LineageOS 24.0 for Samsung Galaxy Tab S6 LTE (gts6l, SM-T865)
+
+## Some Human-Written Words
+
+Heya! This is LineageOS 24.0, with a modified version of the original 4.14 kernel.
+I let Claude make this, with some input on design decisions and what existing work to base this on.
+
+Please do not use this for anything important yet, this may lose all your data, randomly crash, or explode your tablet.
+But in my experience, I did not have any issues watching videos or during web-browsing. (Although lots of small things don't work yet like microphone, sd-card, etc, see the tables below)
+
+If you encounter any bugs or find anything wrong with this, please create an issue, so it can be fixed.
+
+If you want to contribute and help to make this better, I'd be happy to hear from anyone.
+(still need e.g. someone to help test a Wifi Version!)
+
+## Everything below is AI generated.
 
 An unofficial port. It is not made, endorsed or supported by the LineageOS project; please
 do not report its bugs there. Beta quality: it runs as a daily driver on one tablet, but
