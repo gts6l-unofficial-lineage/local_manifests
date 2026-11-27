@@ -66,19 +66,30 @@ Other known issues:
     git clone https://github.com/gts6l-unofficial-lineage/local_manifests -b lineage-24.0 .repo/local_manifests
     repo sync
 
-The proprietary files are not distributed. `extract-stock-blobs.sh` downloads the stock
-firmware from Samsung's update servers (about 6 GB), unpacks its vendor image and runs
-the extraction scripts:
+The proprietary Android vendor files (HALs, libraries, firmware and configuration from
+Samsung's vendor image) are not distributed; you extract them yourself.
+`extract-stock-blobs.sh` downloads the stock firmware from Samsung's update servers (about
+6 GB), unpacks its vendor image and runs the extraction scripts:
 
-    .repo/local_manifests/extract-stock-blobs.sh .
+    ALLOW_OTHER_FIRMWARE=1 .repo/local_manifests/extract-stock-blobs.sh .
+
+The kernel repository is a different matter: like Samsung's kernel source release it is
+based on, it contains binary firmware for touch, key and charger controllers (`firmware/`)
+and a few host tools (`tools/signclient.jar`, `tools/*.so`, `tools/mkdtimg`). They came
+with Samsung's source package; this port has not established separate redistribution terms
+for them.
 
 It needs `samloader`, `unzip`, `tar`, `lz4`, `simg2img`, `debugfs` and `python3`. Pass an
 already downloaded firmware package as second argument to skip the download. To extract
 from an unpacked vendor image by hand, run `./extract-files.py /path/to/dump` in
 `device/samsung/gts6l`.
 
-Samsung's servers only offer the latest firmware, currently T865XXU6DXJ1. The file lists
-were made from T865XXU6DXE1; 12 of the extracted files differ between the two.
+The file lists were made from the vendor image of T865XXU6DXE1, and the releases are
+built from it. Samsung's servers only offer the latest firmware, currently T865XXU6DXJ1,
+in which 12 of the extracted files differ; a build from it is untested and still reports
+the DXE1 fingerprint. The script therefore stops at any other firmware unless
+`ALLOW_OTHER_FIRMWARE=1` is set, as in the command above. With a DXE1 package of your own,
+pass it as second argument and leave the variable out.
 
 Then build:
 
@@ -86,7 +97,24 @@ Then build:
     lunch lineage_gts6l-cp2a-userdebug
     m bacon
 
-A `userdebug` build made this way is signed with the public AOSP test keys.
+A build made this way is signed with the public AOSP test keys, see *Security notes*.
+
+### Rebuilding a release
+
+`gts6l.xml` follows the LineageOS branches, so a build made later differs from a release.
+For each release, `releases/` has a manifest that pins every project to the commit the
+release was built from, and the SHA-256 list of the extracted proprietary files. To use
+them, clone this repository somewhere outside `.repo` (not into `.repo/local_manifests`,
+the pinned manifest is complete) and:
+
+    repo init -u https://github.com/LineageOS/android.git -b lineage-24.0 --git-lfs
+    cp /path/to/local_manifests/releases/gts6l-24.0-20261127.xml .repo/manifests/
+    repo init -m gts6l-24.0-20261127.xml
+    repo sync
+    /path/to/local_manifests/extract-stock-blobs.sh . /path/to/T865XXU6DXE1-firmware.zip
+    (cd vendor/samsung && sha256sum -c --quiet /path/to/local_manifests/releases/gts6l-24.0-20261127.blobs.sha256)
+
+The pinned manifest has not been tested with a fresh `repo sync`.
 
 On NixOS, `nix/fhs.nix` provides the host environment:
 
@@ -111,6 +139,29 @@ Installing wipes all data.
 4. Optional: sideload a GApps package before the first boot.
 
 Updates are installed the same way (step 3 only); data and GApps are kept.
+
+## Security notes
+
+- **Signing.** Release builds from this project are signed with the port's own private
+  keys (release certificate SHA-256
+  `1A:23:19:AC:AA:56:DD:A2:5B:D0:0A:98:AA:E9:53:0C:92:C5:39:03:0F:33:90:84:A2:0D:74:A2:C7:A3:B0:9A`).
+  A build you make from source is signed with the public AOSP test keys unless you set up
+  your own, and anyone can sign an update that such a build accepts. Builds signed with
+  different keys cannot be installed over each other without *Format data*. The APEX
+  modules are signed with the test keys in both cases.
+- **No verified boot.** The bootloader is unlocked and vbmeta is flashed with verification
+  and hashtree checking disabled; the recovery image is signed with the public AVB test
+  key because the build requires a key. Nothing checks the system, vendor or boot images
+  at start-up, so someone with physical access can modify them. User data is still
+  encrypted with your lock screen credential.
+- **userdebug.** Builds are `userdebug`: `adb root` is available once USB debugging is
+  enabled and the computer is authorised. Releases require that authorisation
+  (`ro.adb.secure=1`).
+
+## Licence
+
+Files written for this port are under the Apache License 2.0 (`LICENSE`). The device
+trees list the files under other terms in their `NOTICE`; the kernel is GPL-2.0.
 
 ## Updates
 
