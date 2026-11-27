@@ -16,7 +16,11 @@
 # Environment:
 #   REGION   CSC region to download for (default DBT)
 #   WORKDIR  where to download and unpack (default ./gts6l-firmware, ~12 GB).
-#            The script creates and empties a subdirectory "unpack" in it.
+#            Each run unpacks into a new subdirectory "unpack.XXXXXX"; nothing
+#            that already exists is removed.
+#   ALLOW_OTHER_FIRMWARE=1
+#            continue although the firmware is not the build the file lists
+#            were made from (see EXPECTED below); the result is untested
 #
 # Needs: samloader (samloader-rs), unzip, tar, lz4, simg2img, debugfs
 # (e2fsprogs), python3.
@@ -57,9 +61,8 @@ fi
 echo ">> Unpacking the vendor image from $(basename "$ZIP")"
 AP=$(unzip -Z1 "$ZIP" | grep -E '^AP_.*\.tar\.md5$' | head -n 1 || true)
 [ -n "$AP" ] || die "no AP_*.tar.md5 in $ZIP"
-rm -rf unpack
-mkdir unpack
-cd unpack
+UNPACK=$(mktemp -d "$WORKDIR/unpack.XXXXXX")
+cd "$UNPACK"
 # tar stops with an error at the md5 trailer of the archive; the member is complete by then
 unzip -p "$ZIP" "$AP" | tar -xf - vendor.img.ext4.lz4 2>/dev/null || true
 [ -s vendor.img.ext4.lz4 ] || die "vendor.img.ext4.lz4 not found in $AP"
@@ -80,11 +83,14 @@ rm -f vendor.img
 FOUND=$(sed -n 's/^ro\.vendor\.build\.version\.incremental=//p' dump/vendor/build.prop)
 echo ">> Vendor build: $FOUND"
 if [ "$FOUND" != "$EXPECTED" ]; then
-    echo "warning: the file lists were made from $EXPECTED; files may be missing or differ" >&2
+    echo "The file lists were made from $EXPECTED and the releases are built from it." >&2
+    echo "With $FOUND, files may be missing or differ and the build is not the tested one." >&2
+    [ "${ALLOW_OTHER_FIRMWARE:-}" = 1 ] || die "set ALLOW_OTHER_FIRMWARE=1 to extract from $FOUND anyway (unpacked in $UNPACK)"
+    echo "warning: continuing with $FOUND as requested" >&2
 fi
 
 echo ">> Extracting the proprietary files into $TREE/vendor/samsung"
 cd "$DEVICE_DIR"
-./extract-files.py "$WORKDIR/unpack/dump"
+./extract-files.py "$UNPACK/dump"
 
-echo ">> Done. The unpacked firmware is in $WORKDIR/unpack and can be deleted."
+echo ">> Done. The unpacked firmware is in $UNPACK and can be deleted."
