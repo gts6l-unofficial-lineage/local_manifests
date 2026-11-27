@@ -1,12 +1,15 @@
-# LineageOS 24.0 for the Samsung Galaxy Tab S6 LTE (gts6l, SM-T865)
+# Unofficial LineageOS 24.0 for the Samsung Galaxy Tab S6 LTE (gts6l, SM-T865)
 
-Unofficial port, beta quality: it runs as a daily driver on one tablet, but expect bugs
-and keep a backup. This repository is the entry point: the `repo` manifest, the build
-environment and the install notes. The code lives in three other repositories:
+An unofficial port. It is not made, endorsed or supported by the LineageOS project; please
+do not report its bugs there. Beta quality: it runs as a daily driver on one tablet, but
+expect bugs and keep a backup.
+
+This repository is the entry point: the `repo` manifest, the build environment and the
+install notes. The code lives in three other repositories:
 
 | Repository | Path in the source tree | Contents |
 |---|---|---|
-| `android_device_samsung_gts6l` | `device/samsung/gts6l` | Tablet-specific configuration: display, speakers, fingerprint, S Pen |
+| `android_device_samsung_gts6l` | `device/samsung/gts6l` | Tablet-specific configuration: display, speakers, thermal limits, fingerprint, S Pen |
 | `android_device_samsung_sm8150-common` | `device/samsung/sm8150-common` | Configuration shared by Samsung Snapdragon 855 devices |
 | `android_kernel_samsung_sm8150` | `kernel/samsung/sm8150` | Samsung 4.14 kernel, merged up to 4.14.357 |
 
@@ -14,29 +17,33 @@ Everything else is unmodified LineageOS 24.0; the port needs no platform patches
 
 ## Status
 
-Tested on an SM-T865 with the T865XXU6DXE1 bootloader and firmware.
+Tested on one SM-T865 with the T865XXU6DXE1 bootloader and firmware.
 
-Working: display, touch, S Pen, book cover, fingerprint, encryption, Wi-Fi (including
-WPA3), Bluetooth, sensors, cameras, hardware video decoding, speakers (all four, rotation
-aware, stock tuning), GNSS, GApps through `addon.d`.
+| Area | State |
+|---|---|
+| Display, touch, S Pen, book cover | Working |
+| Brightness | Working: stock curve (2 to 360 nits), auto-brightness, sunlight boost to 500 nits, reduced when the tablet gets hot as on stock |
+| Fingerprint, PIN, encryption | Working |
+| Wi-Fi (including WPA3), Bluetooth, GNSS | Working |
+| Speakers | Working: all four, rotation aware, stock tuning |
+| Cameras | Working; the ultra-wide camera is hidden in the LineageOS camera app |
+| Video | Working: hardware decoding |
+| Sensors | Working |
+| Google apps | Working when sideloaded (kept across updates) |
+| Microphones, call audio | Untested, probably not working |
+| Mobile data, calls, SMS | Untested |
+| USB-C audio | Not working |
+| exFAT microSD cards | Not working (FAT32 works) |
+| Double-tap to wake | Not working |
+| VoLTE, VoWiFi | Not available |
+| Widevine | L3 only |
 
-Not yet verified: mobile data and calls.
+Other known issues:
 
-Known issues:
-
-- Audio capture: the built-in microphones and call audio are untested and probably do not
-  work yet, and the stock audio calibration is not loaded. USB-C headsets are not routed.
-- Maximum brightness is 360 nits. The panel's sunlight boost (up to 500 nits) is disabled,
-  because the stock firmware relies on a thermal policy to limit it that this build cannot
-  reproduce yet. Brightness is still reduced when the thermal HAL reports a severe state.
-- exFAT microSD cards do not mount (FAT32 does).
-- Double-tap to wake has no effect; the ultra-wide camera is hidden in the LineageOS camera
-  app.
-- The first sound after boot can be distorted for about two seconds, until the amplifier
-  firmware is loaded.
+- Sounds are distorted during the setup wizard; they are normal afterwards.
 - The camera takes a few seconds to open the first time after boot.
 - The setup wizard can reject a new PIN as not matching; set the PIN in Settings instead.
-- Widevine is L3; there is no VoLTE or VoWiFi.
+- The stock audio calibration is not loaded.
 
 ## Building
 
