@@ -26,6 +26,9 @@ Known issues:
 
 - Audio capture: the built-in microphones and call audio are untested and probably do not
   work yet, and the stock audio calibration is not loaded. USB-C headsets are not routed.
+- Maximum brightness is 360 nits. The panel's sunlight boost (up to 500 nits) is disabled,
+  because the stock firmware relies on a thermal policy to limit it that this build cannot
+  reproduce yet. Brightness is still reduced when the thermal HAL reports a severe state.
 - exFAT microSD cards do not mount (FAT32 does).
 - Double-tap to wake has no effect; the ultra-wide camera is hidden in the LineageOS camera
   app.
