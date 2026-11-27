@@ -16,18 +16,24 @@ Everything else is unmodified LineageOS 24.0; the port needs no platform patches
 
 Tested on an SM-T865 with the T865XXU6DXE1 bootloader and firmware.
 
-Working: display, touch, S Pen, book cover, fingerprint, encryption, Wi-Fi, Bluetooth,
-sensors, cameras, audio (four speakers, rotation aware, stock tuning), GNSS, Widevine,
-GApps through `addon.d`.
+Working: display, touch, S Pen, book cover, fingerprint, encryption, Wi-Fi (including
+WPA3), Bluetooth, sensors, cameras, hardware video decoding, speakers (all four, rotation
+aware, stock tuning), GNSS, GApps through `addon.d`.
 
-Not yet verified: WPA3, mobile data and calls.
+Not yet verified: mobile data and calls.
 
 Known issues:
 
+- Audio capture: the built-in microphones and call audio are untested and probably do not
+  work yet, and the stock audio calibration is not loaded. USB-C headsets are not routed.
+- exFAT microSD cards do not mount (FAT32 does).
+- Double-tap to wake has no effect; the ultra-wide camera is hidden in the LineageOS camera
+  app.
 - The first sound after boot can be distorted for about two seconds, until the amplifier
   firmware is loaded.
 - The camera takes a few seconds to open the first time after boot.
 - The setup wizard can reject a new PIN as not matching; set the PIN in Settings instead.
+- Widevine is L3; there is no VoLTE or VoWiFi.
 
 ## Building
 
