@@ -48,7 +48,7 @@ Other known issues:
 ## Building
 
     repo init -u https://github.com/LineageOS/android.git -b lineage-24.0 --git-lfs
-    git clone https://github.com/GITHUB_ORG/local_manifests -b lineage-24.0 .repo/local_manifests
+    git clone https://github.com/gts6l-unofficial-lineage/local_manifests -b lineage-24.0 .repo/local_manifests
     repo sync
 
 The proprietary files are not distributed. `extract-stock-blobs.sh` downloads the stock
