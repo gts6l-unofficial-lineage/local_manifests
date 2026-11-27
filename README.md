@@ -84,6 +84,9 @@ Tested on one SM-T865 with the T865XXU6DXE1 bootloader and firmware.
 | VoLTE, VoWiFi | Not available |
 | Widevine | L3 only |
 
+How the port compares with the requirements for official LineageOS devices, item by
+item: [DEVICE_REQUIREMENTS.md](DEVICE_REQUIREMENTS.md).
+
 Other known issues:
 
 - Sounds are distorted during the setup wizard; they are normal afterwards.
