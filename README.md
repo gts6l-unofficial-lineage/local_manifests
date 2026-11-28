@@ -6,7 +6,7 @@ Heya! This is LineageOS 24.0, with a modified version of the original 4.14 kerne
 I let Claude make this, with some input on design decisions and what existing work to base this on.
 
 Please do not use this for anything important yet, this may lose all your data, randomly crash, or explode your tablet.
-But in my experience, I did not have any issues watching videos or during web-browsing. (Although lots of small things don't work yet like microphone, sd-card, etc, see the tables below)
+But in my experience, it's fairly usable and seems to be better than GSIs.
 
 If you encounter any bugs or find anything wrong with this, please create an issue, so it can be fixed.
 
