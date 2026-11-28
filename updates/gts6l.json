@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "datetime": 1795864416,
+    "files": [
+      {
+        "filename": "lineage-24.0-20261128-UNOFFICIAL-gts6l.zip",
+        "os_patch_level": "2026-11-01",
+        "os_sdk_level": 37,
+        "sha256": "5b50fde9bb02e4c70818e042e8dc0e8998ab80ecba12051ac5afe54130d2c383",
+        "size": 1182998277,
+        "url": "https://github.com/gts6l-unofficial-lineage/local_manifests/releases/download/gts6l-24.0-20261128/lineage-24.0-20261128-UNOFFICIAL-gts6l.zip"
+      }
+    ],
+    "type": "UNOFFICIAL",
+    "version": "24.0"
+  }
+]
