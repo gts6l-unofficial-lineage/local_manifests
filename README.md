@@ -89,6 +89,7 @@ reaches you with the next build.
 | Sensors | Accelerometer, gyroscope, light sensor |
 | microSD | FAT32 cards |
 | Google apps | When sideloaded; kept across updates |
+| LiveDisplay | Samsung screen modes, outdoor (sunlight) mode and adaptive backlight; no colour calibration |
 | Performance hints | Touch and launch boosts since 20261127 (the power HAL was never started before) |
 
 ### Not working

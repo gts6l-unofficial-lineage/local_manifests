@@ -204,7 +204,7 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 
 ### Additional features
 
-- [ ] SHOULD support LiveDisplay colour adjustment in the kernel. **Not met**: no LiveDisplay HAL.
+- [x] SHOULD support in-kernel LiveDisplay colour adjustment: mDNIe screen modes, outdoor mode and adaptive backlight. Colour calibration is not offered (the panel driver applies it only in Samsung's browser and e-book scenarios).
 
 ### Software deviations
 
