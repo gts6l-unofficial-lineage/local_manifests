@@ -46,7 +46,7 @@ Nits (minor issues):
 Broken:
 
 - Widevine
-- Play Integrity (fixable by installing magisk) 
+- Play Integrity 
 
 Untested:
 
