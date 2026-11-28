@@ -18,7 +18,6 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 | Requirement | State |
 |---|---|
 | In-call audio | Untested (no SIM); microphones record, but without stock echo cancellation |
-| USB-C audio output | Fix in the tree, untested |
 | Mobile data, calls, emergency calls | Untested (no SIM) |
 | Wi-Fi and Bluetooth MAC address as on stock | Not compared with stock |
 | Wi-Fi hotspot | Not working |
@@ -42,7 +41,7 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 - [ ] SHOULD support additional audio configuration (echo cancellation, extra microphones). **Not met**: the stock Qualcomm calibration (ACDB) is not loaded; it is made for Samsung's audio HAL and broke playback with the open-source one.
 - [ ] MUST support the other audio outputs of stock:
   - [x] Bluetooth: A2DP checked with LDAC (fixed after `20261127`).
-  - [ ] USB-C: **fix in the tree, untested**.
+  - [x] USB-C: digital headphones and DACs (fixed after `20261127`). Analog adapters are not supported by the hardware.
 - **n/a** FM radio: not present.
 
 ### RIL

@@ -79,6 +79,7 @@ reaches you with the next build.
 | Book cover | Sleeps and wakes the tablet |
 | Speakers | All four, rotation aware; Samsung's amplifier tuning and stock EQ curve. No Dolby Atmos |
 | Microphones | Recording since 20261127 |
+| USB-C audio | Digital USB-C headphones and DACs, since 20261127. Passive analog adapters do not work (no analog switch in the hardware, as on stock) |
 | Bluetooth | Audio (LDAC, SBC) since 20261127; before that no profile connected |
 | Wi-Fi | Including WPA3 |
 | GPS | |
@@ -96,7 +97,6 @@ reaches you with the next build.
 |---|---|
 | Wi-Fi hotspot | Starts and stops at once: the DNS/DHCP helper exits. Since 20261127 the settings screen no longer crashes and the switch works |
 | exFAT microSD cards | Fixed in the source, not yet tested |
-| USB-C audio | Fixed in the source, not yet tested |
 | aptX, aptX HD, AAC over Bluetooth | Only LDAC and SBC are offered |
 | Fingerprint | An artifact shows next to the sensor, and the whole panel brightens while it is lit |
 | Audio calibration | The stock Qualcomm calibration (ACDB) is not loaded: it is made for Samsung's audio HAL, and with the open-source HAL used here it broke playback. Recording works, but without stock echo cancellation and noise suppression; volume steps may differ slightly from stock |
