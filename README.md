@@ -95,7 +95,10 @@ need `heimdall` and `adb`. **Installing wipes all data.**
    answer *Yes*.
 7. Choose *Reboot system now*. The first boot takes a few minutes.
 
-Updates are installed the same way (step 5 only); data and GApps are kept.
+Updates keep data and GApps. Install them through Settings > System > Updater, or by
+sideload: reboot to recovery (`adb reboot recovery`, or *Restart* > *Recovery* in the power
+menu with *Advanced restart* enabled in Developer options) and repeat step 5. Flashing
+`recovery.img` again is only needed for a new install.
 
 This repository is the entry point: the `repo` manifest, the build environment and the
 install notes. The code lives in three other repositories:
@@ -157,7 +160,7 @@ official devices, plus what else this tablet has.
 
 Calls, mobile data, SMS and emergency calls (no working SIM); exFAT microSD cards and
 adoptable storage; MTP file transfer; USB and Bluetooth tethering; USB-C display output;
-HDR10 playback; hardware video encoding; the Updater app; fast charging and charging
+HDR10 playback; hardware video encoding; fast charging and charging
 control; the keyboard cover.
 
 The full comparison with the LineageOS requirements, item by item:

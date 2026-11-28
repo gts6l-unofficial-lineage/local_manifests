@@ -22,7 +22,6 @@ State: the `gts6l-24.0-20261128` release, checked on one SM-T865 (T865XXU6DXE1).
 | Wi-Fi and Bluetooth MAC address as on stock | Not compared with stock |
 | USB tethering, MTP | Untested |
 | Hardware video encoding | Untested |
-| Updater app | Points at this port's list, which has the releases from `20261128` on; an update through it is untested |
 | Firmware assert | Missing: the build installs on any firmware |
 | `lineage.dependencies` | Names repositories that are not in the LineageOS organisation |
 | Copyright headers | Port-written files name their author, not The LineageOS Project |
@@ -164,7 +163,7 @@ State: the `gts6l-24.0-20261128` release, checked on one SM-T865 (T865XXU6DXE1).
 
 ### Updater
 
-- [ ] MUST support updates through the Updater app and the documented recovery. Recovery sideload: checked. Updater app: **untested**; its list has the releases from `20261128` on.
+- [x] MUST support updates through the Updater app and the documented recovery. Both checked: recovery sideload, and an update from `20261127` to `20261128` through the Updater app.
 
 ### FRP
 
