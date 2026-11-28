@@ -63,53 +63,55 @@ Everything else is unmodified LineageOS 24.0; the port needs no platform patches
 
 ## Status
 
-Tested on one SM-T865 with the T865XXU6DXE1 bootloader and firmware. The list follows the
-functions LineageOS requires of its official devices, plus what else this tablet has.
+Tested on one SM-T865 with the T865XXU6DXE1 bootloader and firmware, as of the
+`gts6l-24.0-20261128` release. The list follows the functions LineageOS requires of its
+official devices, plus what else this tablet has.
 
-"Since 20261127" means: fixed in the source after the `gts6l-24.0-20261127` release, so it
-reaches you with the next build.
-
-### Working
+### Works as on stock
 
 | Function | Notes |
 |---|---|
 | Display | Stock resolution and density; brightness from 2 to 360 nits on the stock curve, automatic brightness, sunlight boost to 500 nits, reduced when the tablet gets hot as on stock |
-| Touch screen | Double-tap to wake since 20261127 |
-| S Pen | Writing, pressure, tilt, hover, side button; as a direct pen since 20261127 |
+| Touch screen | Including double-tap to wake |
+| S Pen | Writing, pressure, tilt, hover, side button. Samsung's S Pen software (Air Command, Air Actions) is not included |
 | Book cover | Sleeps and wakes the tablet |
 | Speakers | All four, rotation aware; Samsung's amplifier tuning and stock EQ curve. No Dolby Atmos |
-| Microphones | Recording since 20261127 |
-| USB-C audio | Digital USB-C headphones and DACs, since 20261127. Passive analog adapters do not work (no analog switch in the hardware, as on stock) |
-| Bluetooth | Audio (LDAC, SBC) since 20261127; before that no profile connected |
+| USB-C audio | Digital USB-C headphones and DACs. Passive analog adapters do not work, as on stock (no analog switch in the hardware) |
 | Wi-Fi | Including WPA3 |
 | GPS | |
 | Fingerprint, PIN, encryption | File-based encryption with the hardware keystore |
-| Cameras | Front and rear, photo and video; ultra-wide since 20261127 |
-| Video playback | Hardware decoding |
-| Sensors | Accelerometer, gyroscope, light sensor |
+| Sensors | Accelerometer, gyroscope, magnetometer, light sensor, auto-rotate |
 | microSD | FAT32 cards |
 | Google apps | When sideloaded; kept across updates |
-| LiveDisplay | Samsung screen modes, outdoor (sunlight) mode and adaptive backlight; no colour calibration |
-| Performance hints | Touch and launch boosts since 20261127 (the power HAL was never started before) |
+| Battery life | Idle drain and use feel the same as stock; not measured |
+
+### Works, but differs from stock
+
+| Function | Notes |
+|---|---|
+| Cameras | Front, rear and ultra-wide, photo and video, with Samsung's camera driver and tuning. Samsung's image processing (multi-frame HDR, night mode, scene optimiser) and camera modes are part of its camera app and missing |
+| Performance | Samsung's CPU and scheduler boosts for touch and app launch; its memory bus, cache and storage boosts are not included, so launches can be a few percent slower. GPU clocking as on stock |
+| Bluetooth | Pairing and audio with SBC, AAC, aptX, aptX HD and LDAC. No aptX Adaptive: it needs Bluetooth audio offload, which LineageOS cannot use with this controller |
+| Wi-Fi hotspot | WPA2 only; WPA3 is not offered because clients fail to connect with it |
+| Microphones | Recording works, but without stock echo cancellation and noise suppression: the stock Qualcomm audio calibration (ACDB) is made for Samsung's audio HAL and broke playback with the open-source one. Volume steps may differ slightly from stock |
+| LiveDisplay | Samsung screen modes, outdoor (sunlight) mode and adaptive backlight; colour calibration is not offered |
+| Fingerprint sensor | Works, but the whole panel brightens while the sensor is lit (stock hides this with a dimming layer) |
+| Grip sensors | Work, but nothing uses them: stock lowers the radio transmit power while the tablet is held |
+| Widevine | L3 only |
 
 ### Not working
 
 | Function | Notes |
 |---|---|
-| Wi-Fi hotspot | Starts and stops at once: the DNS/DHCP helper exits. Since 20261127 the settings screen no longer crashes and the switch works |
-| exFAT microSD cards | Fixed in the source, not yet tested |
-| aptX, aptX HD, AAC over Bluetooth | Only LDAC and SBC are offered |
-| Fingerprint | An artifact shows next to the sensor, and the whole panel brightens while it is lit |
-| Audio calibration | The stock Qualcomm calibration (ACDB) is not loaded: it is made for Samsung's audio HAL, and with the open-source HAL used here it broke playback. Recording works, but without stock echo cancellation and noise suppression; volume steps may differ slightly from stock |
 | VoLTE, VoWiFi | Not available |
-| Widevine | L3 only |
+| Samsung software | DeX, Air Command, Samsung Notes integration and the like are Samsung apps |
 
 ### Untested
 
-Calls, mobile data, SMS and emergency calls (no SIM); MTP file transfer; USB and Bluetooth
-tethering; adoptable storage; USB-C display output; HDR playback; the Updater app; the
-magnetometer and hall sensor on their own; battery life.
-
+Calls, mobile data, SMS and emergency calls (no working SIM); exFAT microSD cards and
+adoptable storage; MTP file transfer; USB and Bluetooth tethering; USB-C display output;
+HDR10 playback; hardware video encoding; the Updater app; fast charging and charging
+control; the keyboard cover.
 
 The full comparison with the LineageOS requirements, item by item:
 [DEVICE_REQUIREMENTS.md](DEVICE_REQUIREMENTS.md).
@@ -162,11 +164,11 @@ them, clone this repository somewhere outside `.repo` (not into `.repo/local_man
 the pinned manifest is complete) and:
 
     repo init -u https://github.com/LineageOS/android.git -b lineage-24.0 --git-lfs
-    cp /path/to/local_manifests/releases/gts6l-24.0-20261127.xml .repo/manifests/
-    repo init -m gts6l-24.0-20261127.xml
+    cp /path/to/local_manifests/releases/gts6l-24.0-20261128.xml .repo/manifests/
+    repo init -m gts6l-24.0-20261128.xml
     repo sync
     /path/to/local_manifests/extract-stock-blobs.sh . /path/to/T865XXU6DXE1-firmware.zip
-    (cd vendor/samsung && sha256sum -c --quiet /path/to/local_manifests/releases/gts6l-24.0-20261127.blobs.sha256)
+    (cd vendor/samsung && sha256sum -c --quiet /path/to/local_manifests/releases/gts6l-24.0-20261128.blobs.sha256)
 
 The pinned manifest has not been tested with a fresh `repo sync`.
 
@@ -199,8 +201,8 @@ trees list the files under other terms in their `NOTICE`; the kernel is GPL-2.0.
 
 ## Updates
 
-The Updater app reads `updates/gts6l.json` from this repository. The list is empty until
-builds are published; updates can always be installed from recovery as described above.
+The Updater app reads `updates/gts6l.json` from this repository. From
+`gts6l-24.0-20261128` on, it lists each release signed with the release keys; updates can always be installed from recovery as described above.
 
 ## Layout notes
 

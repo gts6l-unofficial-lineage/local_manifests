@@ -7,7 +7,7 @@ Source: [LineageOS Device Support Requirements](https://github.com/LineageOS/cha
 (as of 2026-11-27, licensed CC-BY-3.0). The requirement texts are shortened; the original
 is authoritative. MUST / SHOULD / MAY are used as in that document.
 
-State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE1).
+State: the `gts6l-24.0-20261128` release, checked on one SM-T865 (T865XXU6DXE1).
 
 - `[x]` met and checked on the tablet or in the tree
 - `[ ]` not met, or not tested; the note says which
@@ -20,10 +20,9 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 | In-call audio | Untested (no SIM); microphones record, but without stock echo cancellation |
 | Mobile data, calls, emergency calls | Untested (no SIM) |
 | Wi-Fi and Bluetooth MAC address as on stock | Not compared with stock |
-| Wi-Fi hotspot | Not working |
 | USB tethering, MTP | Untested |
 | Hardware video encoding | Untested |
-| Updater app | Points at this port's list; an update through it is untested |
+| Updater app | Points at this port's list, which has the releases from `20261128` on; an update through it is untested |
 | Firmware assert | Missing: the build installs on any firmware |
 | `lineage.dependencies` | Names repositories that are not in the LineageOS organisation |
 | Copyright headers | Port-written files name their author, not The LineageOS Project |
@@ -40,8 +39,8 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 - [ ] Tablets capable of calls MUST support in-call and speaker audio. **Untested** (no SIM); the microphones record.
 - [ ] SHOULD support additional audio configuration (echo cancellation, extra microphones). **Not met**: the stock Qualcomm calibration (ACDB) is not loaded; it is made for Samsung's audio HAL and broke playback with the open-source one.
 - [ ] MUST support the other audio outputs of stock:
-  - [x] Bluetooth: A2DP checked with LDAC (fixed after `20261127`).
-  - [x] USB-C: digital headphones and DACs (fixed after `20261127`). Analog adapters are not supported by the hardware.
+  - [x] Bluetooth: A2DP checked with SBC, AAC, aptX, aptX HD and LDAC.
+  - [x] USB-C: digital headphones and DACs. Analog adapters are not supported by the hardware, as on stock.
 - **n/a** FM radio: not present.
 
 ### RIL
@@ -60,7 +59,7 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 
 - [x] MUST support Wi-Fi. Including WPA3.
 - [ ] MUST report the same MAC address as stock. **Not compared.**
-- [ ] MUST support Wi-Fi tethering. **Not working** as reported by the owner; the access point starts, the cause is not found yet.
+- [x] MUST support Wi-Fi tethering. WPA2; WPA3 is not offered for the hotspot because clients fail the handshake with it.
 
 ### USB
 
@@ -73,20 +72,20 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 
 ### Bluetooth
 
-- [x] MUST support Bluetooth. Pairing and audio checked; profiles were disabled up to `20261127`.
+- [x] MUST support Bluetooth. Pairing and audio checked.
 - [ ] MUST report the same MAC address as stock. **Not compared.**
 - [ ] SHOULD support Bluetooth tethering. **Untested.**
-- [ ] SHOULD support the aptX variants stock supports (aptX, aptX HD, aptX Adaptive, aptX TWS+). **Not met**: with a headset that supports them, only LDAC and SBC were offered.
+- [ ] SHOULD support the aptX variants stock supports (aptX, aptX HD, aptX Adaptive, aptX TWS+). aptX and aptX HD checked. **aptX Adaptive not met**: LineageOS supports it only through Bluetooth audio offload, which this controller does not report. aptX TWS+ untested.
 
 ### Camera
 
 - [x] MUST support front and rear camera.
-- [ ] SHOULD support all rear cameras. Ultra-wide: **fix in the tree, untested** (it was hidden in the camera app).
+- [x] SHOULD support all rear cameras. Wide and ultra-wide.
 - **n/a** Multiple front cameras: one.
 
 ### Video recording
 
-- [x] MUST support video recording, front and rear. Picture checked; sound not (see microphones).
+- [x] MUST support video recording, front and rear, with sound.
 
 ### Codecs
 
@@ -106,7 +105,7 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 
 ### Fingerprint sensor
 
-- [x] MUST support the fingerprint sensor (optical, under the display; an artifact shows on screen next to the sensor, and lighting it raises the brightness of the whole panel).
+- [x] MUST support the fingerprint sensor (optical, under the display; lighting it raises the brightness of the whole panel, which stock hides with a dimming layer).
 
 ### SD card
 
@@ -119,7 +118,7 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 - [x] Gyroscope.
 - **n/a** Proximity: not present.
 - [x] Light sensor (automatic brightness checked).
-- [ ] SHOULD support the other sensors of stock. Magnetometer, hall sensor (book cover) and the sensor hub types are listed; **not checked one by one**.
+- [ ] SHOULD support the other sensors of stock. Magnetometer and hall sensor (book cover) checked. The grip sensors work when switched on, but nothing in LineageOS uses them (stock lowers the transmit power while the tablet is held). Step counter, pick-up and the other sensor hub types are listed; **not checked one by one**.
 
 ### Accessories
 
@@ -165,7 +164,7 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 
 ### Updater
 
-- [ ] MUST support updates through the Updater app and the documented recovery. Recovery sideload: checked. Updater app: **untested**, its list is still empty.
+- [ ] MUST support updates through the Updater app and the documented recovery. Recovery sideload: checked. Updater app: **untested**; its list has the releases from `20261128` on.
 
 ### FRP
 
@@ -200,7 +199,7 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 
 ### exFAT
 
-- [x] MAY support exFAT with a kernel implementation (kernel older than 5.7, stock supports exFAT). Samsung's sdFAT driver. **Not working** in `20261127`; fix in the tree, untested with an exFAT card.
+- [x] MAY support exFAT with a kernel implementation (kernel older than 5.7, stock supports exFAT). Samsung's sdFAT driver, registered as `exfat`; **untested** with an exFAT card.
 
 ### Additional features
 
@@ -224,6 +223,6 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 - **n/a** GitLab issues: bugs go to this repository's issue tracker.
 - [x] Licensing: kernel GPL-2.0, Android parts Apache-2.0; exceptions are listed in the `NOTICE` files.
 - [ ] Wiki: none. Install instructions and deviations are in the README.
-- [ ] Stability: no "screen of death" seen; battery drain **not measured**.
+- [ ] Stability: no "screen of death" seen, no resets since the power HAL configuration was replaced in `20261128`; battery drain **not measured** (feels as on stock).
 - [x] LineageOS Recovery is built, shipped and used for installation.
 - [x] Addon packages install through the recovery (MindTheGapps checked).
