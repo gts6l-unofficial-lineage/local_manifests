@@ -113,7 +113,6 @@ magnetometer and hall sensor on their own; battery life.
 Other known issues:
 
 - Sounds are distorted during the setup wizard; they are normal afterwards.
-- The camera takes a few seconds to open the first time after boot.
 
 The full comparison with the LineageOS requirements, item by item:
 [DEVICE_REQUIREMENTS.md](DEVICE_REQUIREMENTS.md).
