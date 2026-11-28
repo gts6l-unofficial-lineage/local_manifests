@@ -46,7 +46,7 @@ Nits (minor issues):
 Broken:
 
 - Widevine
-- Play Integrity 
+- Play Integrity (as all Lineage ROMs) 
 
 Untested:
 
