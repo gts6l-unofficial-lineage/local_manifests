@@ -17,7 +17,7 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 
 | Requirement | State |
 |---|---|
-| Microphones, in-call audio | Untested, probably not working (stock calibration not loaded) |
+| In-call audio | Untested (no SIM); microphones record, but without stock echo cancellation |
 | USB-C audio output | Fix in the tree, untested |
 | Mobile data, calls, emergency calls | Untested (no SIM) |
 | Wi-Fi and Bluetooth MAC address as on stock | Not compared with stock |
@@ -38,8 +38,8 @@ State: the tree after `gts6l-24.0-20261127`, checked on one SM-T865 (T865XXU6DXE
 ### Audio
 
 - [x] MUST play media audio. Four speakers, rotation aware.
-- [ ] Tablets capable of calls MUST support in-call and speaker audio. **Untested**; the microphones probably do not work.
-- [ ] SHOULD support additional audio configuration (echo cancellation, extra microphones). **Not met**: the stock audio calibration is not loaded.
+- [ ] Tablets capable of calls MUST support in-call and speaker audio. **Untested** (no SIM); the microphones record.
+- [ ] SHOULD support additional audio configuration (echo cancellation, extra microphones). **Not met**: the stock Qualcomm calibration (ACDB) is not loaded; it is made for Samsung's audio HAL and broke playback with the open-source one.
 - [ ] MUST support the other audio outputs of stock:
   - [x] Bluetooth: A2DP checked with LDAC (fixed after `20261127`).
   - [ ] USB-C: **fix in the tree, untested**.

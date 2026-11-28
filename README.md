@@ -77,7 +77,7 @@ reaches you with the next build.
 | Touch screen | Double-tap to wake since 20261127 |
 | S Pen | Writing, pressure, tilt, hover, side button; as a direct pen since 20261127 |
 | Book cover | Sleeps and wakes the tablet |
-| Speakers | All four, rotation aware, stock tuning |
+| Speakers | All four, rotation aware; Samsung's amplifier tuning and stock EQ curve. No Dolby Atmos |
 | Microphones | Recording since 20261127 |
 | Bluetooth | Audio (LDAC, SBC) since 20261127; before that no profile connected |
 | Wi-Fi | Including WPA3 |
@@ -99,7 +99,7 @@ reaches you with the next build.
 | USB-C audio | Fixed in the source, not yet tested |
 | aptX, aptX HD, AAC over Bluetooth | Only LDAC and SBC are offered |
 | Fingerprint | An artifact shows next to the sensor, and the whole panel brightens while it is lit |
-| Audio calibration | The stock calibration is not loaded; with it, playback broke |
+| Audio calibration | The stock Qualcomm calibration (ACDB) is not loaded: it is made for Samsung's audio HAL, and with the open-source HAL used here it broke playback. Recording works, but without stock echo cancellation and noise suppression; volume steps may differ slightly from stock |
 | VoLTE, VoWiFi | Not available |
 | Widevine | L3 only |
 
