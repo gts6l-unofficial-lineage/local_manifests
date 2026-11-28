@@ -110,9 +110,6 @@ Calls, mobile data, SMS and emergency calls (no SIM); MTP file transfer; USB and
 tethering; adoptable storage; USB-C display output; HDR playback; the Updater app; the
 magnetometer and hall sensor on their own; battery life.
 
-Other known issues:
-
-- Sounds are distorted during the setup wizard; they are normal afterwards.
 
 The full comparison with the LineageOS requirements, item by item:
 [DEVICE_REQUIREMENTS.md](DEVICE_REQUIREMENTS.md).
