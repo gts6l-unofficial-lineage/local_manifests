@@ -7,11 +7,58 @@ I let Claude make this, with some input on design decisions and what existing wo
 
 Please do not use this for anything important yet, this may lose all your data, randomly crash, or explode your tablet.
 But in my experience, it's fairly usable and seems to be better than GSIs.
+Find a table further below on what is confirmed to be good, what's not and what's untested.
 
 If you encounter any bugs or find anything wrong with this, please create an issue, so it can be fixed.
 
 If you want to contribute and help to make this better, I'd be happy to hear from anyone.
 (still need e.g. someone to help test a Wifi Version!)
+
+### Status updated by me
+
+Working like Stock: 
+
+- Wi-Fi
+- Speakers
+- Magnetic cover, double-tap to wake
+- GPS
+- USB-C digital audio out
+- S-Pen Button, Pressure, Tilt (no Samsung Software though)
+- Sensors (gyro, accelerometer, magnetometer, light)
+- Battery Life feels same as stock (idle drain and in use)
+- Auto Brightness (Sun Brightness Boost is locked behind brightness sensor + Thermal Limits like stock; Max Brightness could easily be unlocked, but will shorten the display lifespan)
+- Fingerprint Sensor
+
+Works, but not exactly like stock
+
+- Cameras (missing image/video processing)
+- Performance is equal to stock minus a few nits (governor is same as stock, cpu boost works, still missing minor clock boosts for gpu/cache/mem)
+- Bluetooth audio (missing codec: aptx Adaptive)
+- Hotspot (missing WPA3)
+- Microphones (no postprocessing)
+- Display Color modes/Sun Mode (calibration is not exactly like stock)
+
+Nits (minor issues):
+
+- Reading Fingerprint Sensor brightens the whole screen
+- Some SELinux denials to be fixed (e.g. fingerprint reader wants battery temperature for better matching)
+
+Broken:
+
+- Widevine
+- Play Integrity (fixable by installing magisk) 
+
+Untested:
+
+- Sim
+- Anything related to microSD Cards
+- MTP
+- USB/Bluetooth Tethering
+- HDR10 Video
+- Hardware Video Encoders
+- Display Out over USB-C
+
+
 
 ## Everything below is AI generated.
 
