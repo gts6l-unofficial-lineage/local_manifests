@@ -11,8 +11,11 @@ Find a table further below on what is confirmed to be good, what's not and what'
 
 If you encounter any bugs or find anything wrong with this, please create an issue, so it can be fixed.
 
+## Help Wanted!
+
+This whole repo is obviously not perfect yet. You can help to make it better though!
 If you want to contribute and help to make this better, I'd be happy to hear from anyone.
-(still need e.g. someone to help test a Wifi Version!)
+(still need e.g. someone to help test a Wifi Version and someone with a SIM to test LTE!)
 
 ### Status updated by me
 
@@ -28,6 +31,7 @@ Working like Stock:
 - Battery Life feels same as stock (idle drain and in use)
 - Auto Brightness (Sun Brightness Boost is locked behind brightness sensor + Thermal Limits like stock; Max Brightness could easily be unlocked, but will shorten the display lifespan)
 - Fingerprint Sensor
+- Widevine L1 
 
 Works, but not exactly like stock
 
@@ -41,11 +45,10 @@ Works, but not exactly like stock
 Nits (minor issues):
 
 - Reading Fingerprint Sensor brightens the whole screen
-- Some SELinux denials to be fixed (e.g. fingerprint reader wants battery temperature for better matching)
+- Some SELinux denials probably still to be fixed
 
 Broken:
 
-- Widevine
 - Play Integrity (as all Lineage ROMs) 
 
 Untested:
